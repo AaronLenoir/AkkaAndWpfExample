@@ -20,15 +20,11 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
 
         public class TemperatureMeasured
         {
-            public DateTime TimeStamp { get; private set; }
             public double Temperature { get; private set; }
-            public string Unit { get; private set; }
 
-            public TemperatureMeasured(double temperature, string unit)
+            public TemperatureMeasured(double temperature)
             {
-                TimeStamp = DateTime.Now;
                 Temperature = temperature;
-                Unit = unit;
             }
         }
 
@@ -74,7 +70,7 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
         {
             // TODO: Implement measurement
             _temperature += 0.01;
-            var message = new TemperatureMeasured(Math.Round(_temperature,2), "°C");
+            var message = new TemperatureMeasured(Math.Round(_temperature,2));
             Context.Parent.Tell(message);
         }
 
