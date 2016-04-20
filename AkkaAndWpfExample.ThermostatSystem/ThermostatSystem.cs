@@ -4,36 +4,36 @@ using static WpfAkkaIntegration.ThermostatSystem.Actors.PubSubActor;
 
 namespace WpfAkkaIntegration.ThermostatSystem
 {
-public class ThermostatSystem
-{
-    private ActorSystem _system;
-    private IActorRef _thermostatActor;
-
-    public ThermostatSystem()
+    public class ThermostatSystem
     {
-        _system = ActorSystem.Create(nameof(ThermostatSystem));
-        _thermostatActor = CreateThermostatActor();
-    }
+        private ActorSystem _system;
+        private IActorRef _thermostatActor;
 
-    private IActorRef CreateThermostatActor()
-    {
-        var props = Props.Create<Actors.ThermostatActor>();
-        return _system.ActorOf(props, "thermostat");
-    }
+        public ThermostatSystem()
+        {
+            _system = ActorSystem.Create(nameof(ThermostatSystem));
+            _thermostatActor = CreateThermostatActor();
+        }
 
-    public IThermostatBridge CreateThermostatBridge(IThermostatView thermostatView)
-    {
-        var bridgeActor = CreateBridgeActor(thermostatView);
-        _thermostatActor.Tell(new Subscribe(bridgeActor));
+        private IActorRef CreateThermostatActor()
+        {
+            var props = Props.Create<Actors.ThermostatActor>();
+            return _system.ActorOf(props, "thermostat");
+        }
 
-        return new ThermostatBridge(bridgeActor);
-    }
+        public IThermostatBridge CreateThermostatBridge(IThermostatView thermostatView)
+        {
+            var bridgeActor = CreateBridgeActor(thermostatView);
+            _thermostatActor.Tell(new Subscribe(bridgeActor));
 
-    private IActorRef CreateBridgeActor(IThermostatView thermostatView)
-    {
-        var props = Props.Create(() => new BridgeActor(thermostatView, _thermostatActor))
-            .WithDispatcher("akka.actor.synchronized-dispatcher");
-        return _system.ActorOf(props, "bridge");
+            return new ThermostatBridge(bridgeActor);
+        }
+
+        private IActorRef CreateBridgeActor(IThermostatView thermostatView)
+        {
+            var props = Props.Create(() => new BridgeActor(thermostatView, _thermostatActor))
+                .WithDispatcher("akka.actor.synchronized-dispatcher");
+            return _system.ActorOf(props, "bridge");
+        }
     }
-}
 }

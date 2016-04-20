@@ -1,4 +1,3 @@
-using System;
 using AkkaAndWpfExample.ThermostatSystem.Bridge;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -7,15 +6,15 @@ namespace AkkaAndWpfExample.ThermostatUI.ViewModel
 {
     public class MainViewModel : ViewModelBase, IThermostatView
     {
-        private readonly IThermostatBridge _bridge; 
+        private readonly IThermostatBridge _bridge;
 
-public MainViewModel()
-{
-    _bridge = App.ThermostatSystem.CreateThermostatBridge(this);
+        public MainViewModel()
+        {
+            _bridge = App.ThermostatSystem.CreateThermostatBridge(this);
 
-    IncreaseTargetTemperature = new RelayCommand(() => _bridge.IncreaseTargetTemperature());
-    DecreaseTargetTemperature = new RelayCommand(() => _bridge.DecreaseTargetTemperature());
-}
+            IncreaseTargetTemperature = new RelayCommand(() => _bridge.IncreaseTargetTemperature());
+            DecreaseTargetTemperature = new RelayCommand(() => _bridge.DecreaseTargetTemperature());
+        }
 
         public RelayCommand IncreaseTargetTemperature { get; private set; }
 
