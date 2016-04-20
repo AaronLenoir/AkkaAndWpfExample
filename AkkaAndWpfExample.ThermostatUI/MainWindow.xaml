@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AkkaAndWpfExample.ThermostatUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="Thermostat (WPF and Akka.NET Excercise)" Height="350" Width="525"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -17,8 +17,14 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.RowSpan="3" Content="{Binding Temperature}" FontSize="80" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-        <Label Grid.Row="1" Grid.Column="2" Content="{Binding TargetTemperature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42.667"></Label>
+        <StackPanel Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="{Binding Temperature}" FontSize="80" VerticalAlignment="Center"></Label>
+            <Label Content="°C" FontSize="32" VerticalAlignment="Center"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="{Binding TargetTemperature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="38"></Label>
+            <Label Content="°C" FontSize="18" VerticalAlignment="Center"></Label>
+        </StackPanel>
         <Button Content="+" Grid.Column="2" Command="{Binding IncreaseTargetTemperature}" FontSize="48"></Button>
         <Button Content="-" Grid.Column="2" Grid.Row="2" Command="{Binding DecreaseTargetTemperature}" FontSize="48"></Button>
     </Grid>

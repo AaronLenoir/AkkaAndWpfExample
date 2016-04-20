@@ -118,6 +118,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AkkaAndWpfExample.ThermostatSystem\AkkaAndWpfExample.ThermostatSystem.csproj">
+      <Project>{ba8d5cbb-ee18-42b7-b871-eb055f2f57af}</Project>
+      <Name>AkkaAndWpfExample.ThermostatSystem</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

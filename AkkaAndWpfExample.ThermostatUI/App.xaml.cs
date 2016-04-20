@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace AkkaAndWpfExample.ThermostatUI
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-    }
+public partial class App : Application
+{
+    private static WpfAkkaIntegration.ThermostatSystem.ThermostatSystem _system = new WpfAkkaIntegration.ThermostatSystem.ThermostatSystem();
+
+    public static WpfAkkaIntegration.ThermostatSystem.ThermostatSystem ThermostatSystem => _system;
+}
 }

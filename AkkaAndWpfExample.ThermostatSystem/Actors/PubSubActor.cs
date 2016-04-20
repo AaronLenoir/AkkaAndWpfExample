@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Akka.Actor;
+﻿using Akka.Actor;
 using System.Collections.Generic;
 
 namespace WpfAkkaIntegration.ThermostatSystem.Actors
 {
-    public class PubSubActor : ReceiveActor
+    public abstract class PubSubActor : ReceiveActor
     {
 
         #region Messages
@@ -41,6 +39,7 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
         private void handleSubscribe(Subscribe message)
         {
             _subscribers.Add(message.Subscriber);
+            OnSubscribe(message.Subscriber);
         }
 
         #endregion
@@ -52,5 +51,7 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
                 subscriber.Tell(message);
             }
         }
+
+        public abstract void OnSubscribe(IActorRef subscriber);
     }
 }

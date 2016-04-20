@@ -1,4 +1,5 @@
-﻿using Akka.Actor;
+﻿using System;
+using Akka.Actor;
 
 namespace WpfAkkaIntegration.ThermostatSystem.Actors
 {
@@ -13,8 +14,8 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
 
         public class IncreaseTargetTemperature
         {
-            public int Step { get; private set; }
-            public IncreaseTargetTemperature(int step) { Step = step; }
+            public double Step { get; private set; }
+            public IncreaseTargetTemperature(double step) { Step = step; }
         }
 
         public class DecreaseTargetTemperature
@@ -33,7 +34,7 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
 
         #region State
 
-        private double _targetTemperature;
+        private double _targetTemperature = 21;
         private IActorRef _temperatureSensor;
 
         #endregion
@@ -74,6 +75,12 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
 
         private void HandleMeasurement(TemperatureSensorActor.TemperatureMeasured message)
         {
+            Publish(message);
+        }
+
+        public override void OnSubscribe(IActorRef subscriber)
+        {
+            var message = new TargetTemperatureSet(_targetTemperature);
             Publish(message);
         }
 
