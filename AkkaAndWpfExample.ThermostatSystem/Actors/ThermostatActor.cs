@@ -81,7 +81,7 @@ namespace WpfAkkaIntegration.ThermostatSystem.Actors
         public override void OnSubscribe(IActorRef subscriber)
         {
             var message = new TargetTemperatureSet(_targetTemperature);
-            Publish(message);
+            subscriber.Tell(message);
         }
 
         #endregion
