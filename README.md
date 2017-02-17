@@ -2,7 +2,7 @@
 
 Code backing up a blogpost on integrating Akka.NET and WPF. This branch is the starting point, the solution I came up with is in the "bridged" branch.
 
-The post: https://blog-aaronlenoir.rhcloud.com/2016/04/20/integrating-wpf-and-akka-net-2
+The post: https://blog.aaronlenoir.com/2016/04/20/integrating-wpf-and-akka-net-2
 
 Full text:
 
